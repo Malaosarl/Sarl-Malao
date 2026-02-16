@@ -1,6 +1,6 @@
 # 📌 Tâches restantes – Répartition Toi / Bmass
 
-Ce fichier sert à répartir le travail entre toi et Bmass. **Backend** = surtout Bmass, **Frontend** = surtout toi (ajustable). Une première étape est de **valider l’état réel** du projet avant de coder.
+Ce fichier sert à répartir le travail entre MHD et Bmass. **Backend** = surtout Bmass, **Frontend** = surtout MHD(ajustable). Une première étape est de **valider l’état réel** du projet avant de coder.
 
 ---
 
@@ -8,8 +8,8 @@ Ce fichier sert à répartir le travail entre toi et Bmass. **Backend** = surtou
 
 | Tâche | Responsable |
 |-------|-------------|
-| Vérifier les pages frontend dans `frontend/src/pages` | Toi |
-| Vérifier la page cartographie `/app/map` et Mapbox | Toi |
+| Vérifier les pages frontend dans `frontend/src/pages` | MHD |
+| Vérifier la page cartographie `/app/map` et Mapbox | MHD |
 | Vérifier l’export PDF/Excel et les notifications (backend + frontend) | Bmass |
 | Vérifier la PWA (manifest + service worker) | Bmass |
 | Vérifier les scripts DB (schema, seed, migrations) | Bmass |
@@ -22,8 +22,8 @@ Ce fichier sert à répartir le travail entre toi et Bmass. **Backend** = surtou
 |-------|-------------|
 | Écrire les scripts de migration (si absents) | Bmass |
 | Écrire les scripts de seed (données de test) | Bmass |
-| Ajouter une doc API (Swagger/OpenAPI) | Toi |
-| Tester les endpoints (Postman/Insomnia) et documenter | Toi |
+| Ajouter une doc API (Swagger/OpenAPI) | MHD |
+| Tester les endpoints (Postman/Insomnia) et documenter | MHD |
 
 ---
 
@@ -31,9 +31,9 @@ Ce fichier sert à répartir le travail entre toi et Bmass. **Backend** = surtou
 
 | Tâche | Responsable |
 |-------|-------------|
-| Finaliser les pages modules si incomplètes | Toi |
-| Finaliser le dashboard (KPIs / graphes réels) | Toi |
-| Finaliser la cartographie (UI + données réelles) | Toi |
+| Finaliser les pages modules si incomplètes | MHD |
+| Finaliser le dashboard (KPIs / graphes réels) | MHD |
+| Finaliser la cartographie (UI + données réelles) | MHD |
 
 ---
 
@@ -50,7 +50,7 @@ Ce fichier sert à répartir le travail entre toi et Bmass. **Backend** = surtou
 
 | Tâche | Responsable |
 |-------|-------------|
-| Créer l’interface admin multi‑entités | Toi |
+| Créer l’interface admin multi‑entités | MHD |
 
 ---
 
@@ -66,7 +66,7 @@ Ce fichier sert à répartir le travail entre toi et Bmass. **Backend** = surtou
 
 | Tâche | Responsable |
 |-------|-------------|
-| Tests unitaires | Toi |
+| Tests unitaires | MHD|
 | Tests d’intégration | Bmass |
 | Tests E2E | Bmass |
 
@@ -78,43 +78,43 @@ Ce fichier sert à répartir le travail entre toi et Bmass. **Backend** = surtou
 
 | Tâche | Backend | Frontend |
 |-------|---------|----------|
-| Identifiants par rôle (Malao-PROD-XXX, Malao-RPROD-XX, etc.) | Bmass | Toi |
-| Choix type de production (bétail, volaille, piscicole) et sous-types (ruminant, embauche, laitière, démarrage, croissance, finition, etc.) | Bmass | Toi |
-| Intégration des formulations (Excel / référentiel) et lien formulation → production | Bmass | Toi |
-| Pesée + démarrage processus et mise à jour stock / coûts automatique | Bmass | Toi |
+| Identifiants par rôle (Malao-PROD-XXX, Malao-RPROD-XX, etc.) | Bmass | MHD |
+| Choix type de production (bétail, volaille, piscicole) et sous-types (ruminant, embauche, laitière, démarrage, croissance, finition, etc.) | Bmass |MHD |
+| Intégration des formulations (Excel / référentiel) et lien formulation → production | Bmass | MHD|
+| Pesée + démarrage processus et mise à jour stock / coûts automatique | Bmass |MHD |
 
 ### Base fournisseurs et clients
 
 | Tâche | Backend | Frontend |
 |-------|---------|----------|
-| Base fournisseurs (CRUD, suivi achats) | Bmass | Toi |
-| Base clients (profil, suivi SAV) | Bmass | Toi |
+| Base fournisseurs (CRUD, suivi achats) | Bmass | MHD |
+| Base clients (profil, suivi SAV) | Bmass |MHD |
 
 ### Interface client & QR code
 
 | Tâche | Backend | Frontend |
 |-------|---------|----------|
-| Génération / gestion QR code par produit (ex. sac Ripase) | Bmass | Toi |
-| Page ou app « scan QR » : infos produit, usage, tableau de bord client | Bmass | Toi |
-| Prise de rendez-vous / contact vétérinaire depuis le parcours client | Bmass | Toi |
-| Notation du service / vétérinaire | Bmass | Toi |
+| Génération / gestion QR code par produit (ex. sac Ripase) | Bmass |MHD|
+| Page ou app « scan QR » : infos produit, usage, tableau de bord client | Bmass | MHD |
+| Prise de rendez-vous / contact vétérinaire depuis le parcours client | Bmass |MHD |
+| Notation du service / vétérinaire | Bmass | MHD |
 
 ### Portails par profil (client, expert agrobusiness, utilisateur)
 
 | Tâche | Backend | Frontend |
 |-------|---------|----------|
-| Client : profil, gestock produit acheté, suivi activité, ventes, dashboard, accès réseau | Bmass | Toi |
-| Expert agrobusiness : profil, offres, calendrier RDV, dashboard, réseau | Bmass | Toi |
-| Utilisateur (étudiant, particulier) : profil, accès offres/services, dashboard, réseau | Bmass | Toi |
+| Client : profil, gestock produit acheté, suivi activité, ventes, dashboard, accès réseau | Bmass |MHD|
+| Expert agrobusiness : profil, offres, calendrier RDV, dashboard, réseau | Bmass | MHD|
+| Utilisateur (étudiant, particulier) : profil, accès offres/services, dashboard, réseau | Bmass | MHD|
 
 ### Côté MALAO (admin / direction)
 
 | Tâche | Backend | Frontend |
 |-------|---------|----------|
 | Mise en ligne produits et infos | Bmass | Toi |
-| Réseau, formations en ligne, sensibilisation (langues nationales) | Bmass | Toi |
-| Calendrier partagé, RDV, suivi après-vente | Bmass | Toi |
-| Opérations en ligne (ex. opération Tabaski) | Bmass | Toi |
+| Réseau, formations en ligne, sensibilisation (langues nationales) | Bmass | MHD |
+| Calendrier partagé, RDV, suivi après-vente | Bmass | MHD |
+| Opérations en ligne (ex. opération Tabaski) | Bmass | MHD|
 
 ---
 
