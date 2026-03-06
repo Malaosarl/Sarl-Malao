@@ -1,5 +1,5 @@
-import { useEffect, useState, useRef } from 'react';
-import Map, { Marker, Popup, Source, Layer } from 'react-map-gl';
+import { useEffect, useState } from 'react';
+import Map, { Marker, Popup } from 'react-map-gl';
 import 'mapbox-gl/dist/mapbox-gl.css';
 import { MapPin, Factory, Package, Sprout, Truck } from 'lucide-react';
 import api from '../../lib/api';
@@ -14,23 +14,28 @@ interface MapLocation {
   data?: any;
 }
 
+const MAPBOX_TOKEN = import.meta.env.VITE_MAPBOX_TOKEN ?? '';
+
 export default function MapPage() {
   const [viewState, setViewState] = useState({
-    longitude: -15.1185, 
+    longitude: -15.1185,
     latitude: 15.3950,
     zoom: 12
   });
   const [locations, setLocations] = useState<MapLocation[]>([]);
   const [selectedLocation, setSelectedLocation] = useState<MapLocation | null>(null);
   const [mapType, setMapType] = useState<'sites' | 'parcels' | 'all'>('all');
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
     fetchLocations();
   }, [mapType]);
 
   const fetchLocations = async () => {
+    setLoading(true);
+    setError(null);
     try {
-      
       const sitesResponse = await api.get('/agropole/sites');
       const sites = (sitesResponse.data.data || []).map((site: any) => ({
         id: site.id,
@@ -38,11 +43,10 @@ export default function MapPage() {
         type: 'site' as const,
         latitude: parseFloat(site.latitude || '15.3950'),
         longitude: parseFloat(site.longitude || '-15.1185'),
-        description: site.location,
+        description: site.location_name || site.location,
         data: site
       }));
 
-      
       const parcelsResponse = await api.get('/agropole/parcels');
       const parcels = (parcelsResponse.data.data || []).map((parcel: any) => ({
         id: parcel.id,
@@ -50,7 +54,7 @@ export default function MapPage() {
         type: 'parcel' as const,
         latitude: parseFloat(parcel.latitude || '15.3950'),
         longitude: parseFloat(parcel.longitude || '-15.1185'),
-        description: `${parcel.area_hectares} ha - ${parcel.current_crop || 'Non cultivé'}`,
+        description: `${parcel.area_hectares} ha - ${parcel.current_crop_name || parcel.current_crop || 'Non cultivé'}`,
         data: parcel
       }));
 
@@ -63,8 +67,11 @@ export default function MapPage() {
       }
 
       setLocations(allLocations);
-    } catch (error) {
-      console.error('Erreur lors du chargement des localisations:', error);
+    } catch (err: any) {
+      console.error('Erreur lors du chargement des localisations:', err);
+      setError(err?.message || 'Impossible de charger les sites et parcelles.');
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -92,6 +99,18 @@ export default function MapPage() {
       default: return 'bg-gray-600';
     }
   };
+
+  if (!MAPBOX_TOKEN) {
+    return (
+      <div className="space-y-6">
+        <h1 className="text-3xl font-bold text-gray-900 mb-2">Cartographie</h1>
+        <div className="bg-amber-50 border border-amber-200 rounded-lg p-4 text-amber-800">
+          <p className="font-medium">Token Mapbox manquant</p>
+          <p className="text-sm mt-1">Définissez <code className="bg-amber-100 px-1 rounded">VITE_MAPBOX_TOKEN</code> dans un fichier <code className="bg-amber-100 px-1 rounded">.env</code> à la racine du frontend pour afficher la carte.</p>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div className="space-y-6">
@@ -128,11 +147,23 @@ export default function MapPage() {
         </div>
       </div>
 
-      <div className="bg-white rounded-lg shadow-sm border border-gray-200 overflow-hidden" style={{ height: '600px' }}>
+      {error && (
+        <div className="bg-red-50 border border-red-200 rounded-lg p-4 text-red-800">
+          <p className="font-medium">Erreur</p>
+          <p className="text-sm mt-1">{error}</p>
+        </div>
+      )}
+
+      <div className="bg-white rounded-lg shadow-sm border border-gray-200 overflow-hidden relative" style={{ height: '600px' }}>
+        {loading && (
+          <div className="absolute inset-0 bg-white/80 flex items-center justify-center z-10">
+            <span className="text-gray-600">Chargement des localisations...</span>
+          </div>
+        )}
         <Map
           {...viewState}
           onMove={evt => setViewState(evt.viewState)}
-          mapboxAccessToken={import.meta.env.VITE_MAPBOX_TOKEN ?? ''}
+          mapboxAccessToken={MAPBOX_TOKEN}
           style={{ width: '100%', height: '100%' }}
           mapStyle="mapbox://styles/mapbox/streets-v12"
         >
@@ -175,11 +206,11 @@ export default function MapPage() {
                 </div>
                 {selectedLocation.data && (
                   <div className="mt-2 text-xs text-gray-500">
-                    {selectedLocation.data.area_hectares && (
+                    {selectedLocation.data.area_hectares != null && (
                       <p>Superficie: {selectedLocation.data.area_hectares} ha</p>
                     )}
-                    {selectedLocation.data.current_crop && (
-                      <p>Culture: {selectedLocation.data.current_crop}</p>
+                    {(selectedLocation.data.current_crop_name ?? selectedLocation.data.current_crop) && (
+                      <p>Culture: {selectedLocation.data.current_crop_name ?? selectedLocation.data.current_crop}</p>
                     )}
                   </div>
                 )}
