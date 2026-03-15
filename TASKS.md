@@ -6,13 +6,13 @@ Ce fichier sert à répartir le travail entre toi et Bmass. **Backend** = surtou
 
 ## ✅ À valider d’abord (audit rapide)
 
-| Tâche | Responsable |
-|-------|-------------|
-| Vérifier les pages frontend dans `frontend/src/pages` | Toi |
-| Vérifier la page cartographie `/app/map` et Mapbox | Toi |
-| Vérifier l’export PDF/Excel et les notifications (backend + frontend) | Bmass |
-| Vérifier la PWA (manifest + service worker) | Bmass |
-| Vérifier les scripts DB (schema, seed, migrations) | Bmass |
+| Tâche | Responsable | Statut |
+|-------|-------------|--------|
+| Vérifier les pages frontend dans `frontend/src/pages` | Toi | ✅ Fait – voir `AUDIT_FRONTEND.md` |
+| Vérifier la page cartographie `/app/map` et Mapbox | Toi | ✅ Fait – voir `AUDIT_FRONTEND.md` |
+| Vérifier l’export PDF/Excel et les notifications (backend + frontend) | Bmass | |
+| Vérifier la PWA (manifest + service worker) | Bmass | |
+| Vérifier les scripts DB (schema, seed, migrations) | Bmass | |
 
 ---
 
