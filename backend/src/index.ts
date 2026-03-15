@@ -25,6 +25,8 @@ import rbacRoutes from './routes/rbac';
 import workflowRoutes from './routes/workflows';
 import iotRoutes from './routes/iot';
 import entityRoutes from './routes/entities';
+import swaggerUi from 'swagger-ui-express';
+import { specs } from './config/swagger';
 
 
 dotenv.config();
@@ -82,6 +84,10 @@ app.use('/api/v1/rbac', rbacRoutes);
 app.use('/api/v1/workflows', workflowRoutes);
 app.use('/api/v1/iot', iotRoutes);
 app.use('/api/v1/entities', entityRoutes);
+
+// Documentation Swagger
+app.use('/api-docs', swaggerUi.serve);
+app.get('/api-docs', swaggerUi.setup(specs));
 
 
 app.use(notFoundHandler);
